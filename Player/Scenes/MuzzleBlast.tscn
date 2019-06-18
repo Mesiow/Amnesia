@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=2]
+
+[sub_resource type="Curve" id=6]
+max_value = 100.0
+_data = [ Vector2( 0.00155767, 169.019 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0102389, 0.0136519, 0.737201, 0.856655, 0.860068, 0.979522, 0.986348, 0.989761, 0.993174, 0.996587, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.209053, 0.209053, 0.209053, 1, 1, 1, 1, 1, 0.302734, 0.302734, 0.302734, 1, 0.28946, 0.28946, 0.28946, 1, 0.13794, 0.13794, 0.13794, 1, 0, 0, 0, 1, 0.996528, 0.996528, 0.996528, 1, 0.971879, 0.971879, 0.971879, 1, 0.314453, 0.314453, 0.314453, 1, 0.956522, 0.956522, 0.956522, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=8]
+max_value = 100.0
+_data = [ Vector2( 0.0034245, 49.67 ), 0.0, -224.981, 0, 0, Vector2( 1, 76.29 ), -1004.59, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="Curve" id=4]
+min_value = 0.5
+_data = [ Vector2( 0, 1 ), 0.0, -3.60482, 0, 0, Vector2( 1, 0.85505 ), -17.0639, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+spread = 20.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.3
+angular_velocity = 20.0
+angular_velocity_random = 0.2
+angular_velocity_curve = SubResource( 7 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping_random = 1.0
+damping_curve = SubResource( 9 )
+angle_random = 0.5
+scale = 6.0
+scale_random = 1.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 2 )
+
+[node name="MuzzleBlast" type="Particles2D"]
+position = Vector2( 18.0412, 0 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 100
+lifetime = 1.5
+speed_scale = 2.0
+explosiveness = 0.8
+local_coords = false
+process_material = SubResource( 3 )
