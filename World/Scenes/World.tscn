@@ -2,25 +2,13 @@
 
 [ext_resource path="res://World/Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Player/Scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Environment/Scenes/Shrub.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Environment/Scenes/GeneratedMap.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 544, 448 )
+z_index = 1
 
-[node name="Shrub" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1040, 448 )
-
-[node name="Shrub2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1276, 544 )
-
-[node name="Shrub3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1168, 544 )
-
-[node name="Shrub4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1344, 448 )
-
-[node name="Shrub5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1264, 448 )
+[node name="GeneratedMap" parent="." instance=ExtResource( 3 )]

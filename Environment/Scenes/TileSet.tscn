@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Environment/Sprites/naturetileset.png" type="Texture" id=1]
+[ext_resource path="res://Environment/Sprites/trees.png" type="Texture" id=2]
 
 [sub_resource type="TileSet" id=1]
-0/name = "naturetileset.png 0"
+0/name = "shrub_3"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
@@ -13,7 +14,7 @@
 0/navigation_offset = Vector2( 0, 0 )
 0/shapes = [  ]
 0/z_index = 0
-1/name = "naturetileset.png 1"
+1/name = "shrub_2"
 1/texture = ExtResource( 1 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
@@ -23,7 +24,7 @@
 1/navigation_offset = Vector2( 0, 0 )
 1/shapes = [  ]
 1/z_index = 0
-2/name = "naturetileset.png 2"
+2/name = "grass_1"
 2/texture = ExtResource( 1 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
@@ -33,7 +34,7 @@
 2/navigation_offset = Vector2( 0, 0 )
 2/shapes = [  ]
 2/z_index = 0
-3/name = "naturetileset.png 3"
+3/name = "shrub_1"
 3/texture = ExtResource( 1 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
@@ -43,7 +44,7 @@
 3/navigation_offset = Vector2( 0, 0 )
 3/shapes = [  ]
 3/z_index = 0
-4/name = "naturetileset.png 4"
+4/name = "water"
 4/texture = ExtResource( 1 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
@@ -54,8 +55,29 @@
 4/shapes = [  ]
 4/z_index = 0
 
-[node name="TileMap" type="TileMap"]
+[sub_resource type="TileSet" id=2]
+0/name = "tree_1"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 64, 160 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 1
+
+[node name="Tiles" type="Node2D"]
+
+[node name="GrassTileSet" type="TileMap" parent="."]
+modulate = Color( 0.156863, 0.709804, 0, 1 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 65529, 1, 0, 1507376, 0, 0, 1507378, 1, 0, 1572912, 0, 0, 1572917, 3, 0, 1638450, 2, 0, 1638451, 2, 0, 1638453, 3, 0, 1638454, 3, 0, 1703984, 0, 0, 1703986, 2, 0, 1703987, 2, 0, 1703990, 3, 0, 1703991, 3, 0, 1769516, 0, 0, 1769520, 0, 0, 1769522, 2, 0, 1769528, 3, 0, 1835048, 2, 0, 1835057, 2, 0, 1835064, 3, 0, 1900600, 3, 0, 1966136, 3, 0, 2031660, 2, 0, 2031661, 2, 0, 2031663, 2, 0, 2031665, 2, 0, 2031666, 2, 0, 2031667, 2, 0, 2031668, 2, 0, 2031669, 2, 0, 2031670, 2, 0, 2031671, 2, 0, 2031672, 3, 0, 2097194, 3, 0, 2097195, 3, 0, 2097196, 3, 0, 2097204, 2, 0, 2097205, 2, 0, 2097206, 2, 0, 2097207, 2, 0, 2097208, 3, 0, 2162730, 3, 0, 2162731, 2, 0, 2162732, 2, 0, 2162738, 2, 0, 2162740, 2, 0, 2162741, 2, 0, 2162742, 2, 0, 2162743, 3, 0, 2228266, 2, 0, 2228267, 2, 0, 2228271, 2, 0, 2228276, 2, 0, 2228277, 2, 0, 2293802, 2, 0, 2293804, 2, 0, 2293807, 2, 0, 2293812, 3, 0, 2293813, 2, 0, 2359338, 2, 0, 2359348, 4, 0, 2359349, 4, 0, 2424875, 2, 0, 2424883, 4, 0, 2424884, 4, 0, 2424885, 4, 0, 2490419, 4, 0, 2490420, 4, 0, 2490421, 4, 0, 2555955, 4, 0 )
+
+[node name="TreeTileSet" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_tile_origin = 1
+cell_y_sort = true
+format = 1
