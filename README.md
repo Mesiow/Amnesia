@@ -8,3 +8,7 @@ as long as you can
 
 # Gameplay Mechanics  
 Day/Night Cycle, Hunger, Health, Food, Water and Sanity
+
+# Art  
+Character art is my own  
+Environment art being used is from the web
