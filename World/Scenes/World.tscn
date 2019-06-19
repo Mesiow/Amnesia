@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Player/Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Environment/Scenes/GeneratedMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/Scenes/DayNightCycle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Environment/Scenes/Firepit.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
@@ -15,3 +16,6 @@ z_index = 1
 [node name="GeneratedMap" parent="." instance=ExtResource( 3 )]
 
 [node name="DayNightCycle" parent="." instance=ExtResource( 4 )]
+
+[node name="Firepit" parent="." instance=ExtResource( 5 )]
+position = Vector2( 512, 544 )

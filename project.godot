@@ -61,5 +61,5 @@ fire_rifle={
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.00392157, 0.172549, 0, 1 )
+environment/default_clear_color=Color( 0.321569, 0.321569, 0.321569, 1 )
 environment/default_environment="res://default_env.tres"
