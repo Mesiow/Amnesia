@@ -48,3 +48,4 @@ __meta__ = {
 stream = ExtResource( 6 )
 volume_db = -15.0
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="finished" from="Footstep" to="." method="_on_Footstep_finished"]

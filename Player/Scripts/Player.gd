@@ -41,6 +41,8 @@ func _physics_process(delta):
 		velocity.x = speed
 		anim.play("moving")
 	
+	if velocity == Vector2(0,0): #not moving
+		anim.stop()
 	velocity = velocity.normalized()
 	velocity = move_and_slide(velocity * speed)
 	pass
@@ -51,4 +53,9 @@ func _on_AnimatedSprite_animation_finished():
 	
 func flipRifle(val):
 	rifle.sprite.flip_v=val
+	pass
+
+
+func _on_Footstep_finished():
+	footstep.stop()
 	pass
