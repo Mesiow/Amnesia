@@ -28,7 +28,7 @@ amount = 20
 scale = Vector2( 0.3, 0.2 )
 texture = ExtResource( 3 )
 color = Color( 0.941176, 0.392157, 0.0627451, 1 )
-energy = 1.5
+energy = 1.2
 shadow_enabled = true
 
 [editable path="torch"]

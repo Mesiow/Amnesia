@@ -3,6 +3,8 @@ extends KinematicBody2D
 var velocity=Vector2()
 var speed=150
 
+const Firepit=preload("res://Environment/Scenes/Firepit.tscn")
+
 onready var rifle=$Hands/Rifle
 onready var anim=$AnimatedSprite
 onready var footstep=$Footstep
@@ -26,6 +28,11 @@ func _physics_process(delta):
 		if readyToShoot:
 			rifle.shoot()
 			readyToShoot = false
+			
+	if Input.is_action_just_pressed("use"):
+		var pit=Firepit.instance()
+		pit.global_position = global_position
+		get_tree().get_root().get_node("/root/World").add_child(pit)
 		
 	if Input.is_action_pressed("up"):
 		velocity.y = -speed
