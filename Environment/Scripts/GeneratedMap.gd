@@ -3,6 +3,7 @@ extends Node2D
 onready var grassTiles=$Tiles/GrassTileSet
 onready var treeTiles=$Tiles/TreeTileSet
 
+const TILE_SIZE = 16
 const MAX_SIZE_X = 300
 const MAX_SIZE_Y = 200
 

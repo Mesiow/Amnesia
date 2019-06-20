@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Night_Sounds_-_Crickets-Lisa_Redfern-591005346.ogg-a92e8f85fc247a535178f25f1dc1a517.oggstr"
+
+[deps]
+
+source_file="res://Environment/Sounds/Night_Sounds_-_Crickets-Lisa_Redfern-591005346.ogg"
+dest_files=[ "res://.import/Night_Sounds_-_Crickets-Lisa_Redfern-591005346.ogg-a92e8f85fc247a535178f25f1dc1a517.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

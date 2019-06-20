@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Environment/Scripts/DayNightCycle.gd" type="Script" id=1]
 [ext_resource path="res://Environment/Sounds/Nature Ambiance-SoundBible.com-1444637890.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Environment/Sounds/Night_Sounds_-_Crickets-Lisa_Redfern-591005346.ogg" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "NightTransition"
@@ -33,4 +34,13 @@ stream = ExtResource( 2 )
 volume_db = -80.0
 
 [node name="NightTimeAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -80.0
+
+[node name="DayTimer" type="Timer" parent="."]
+wait_time = 0.01
+
+[node name="NightTimer" type="Timer" parent="."]
 [connection signal="animation_finished" from="CanvasModulate/Cycle" to="." method="_on_Cycle_animation_finished"]
+[connection signal="timeout" from="DayTimer" to="." method="_on_DayTimer_timeout"]
+[connection signal="timeout" from="NightTimer" to="." method="_on_NightTimer_timeout"]

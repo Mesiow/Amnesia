@@ -5,9 +5,12 @@ var speed=150
 
 const Firepit=preload("res://Environment/Scenes/Firepit.tscn")
 
+onready var map = get_parent().get_node("GeneratedMap")
+
 onready var rifle=$Hands/Rifle
 onready var anim=$AnimatedSprite
 onready var footstep=$Footstep
+onready var camera=$Camera2D
 
 var readyToShoot = true
 
@@ -34,6 +37,11 @@ func _physics_process(delta):
 		pit.global_position = global_position
 		get_tree().get_root().get_node("/root/World").add_child(pit)
 		
+	if Input.is_action_just_pressed("increase_zoom"):
+		camera.zoom += Vector2(0.1, 0.1)
+	if Input.is_action_just_pressed("decrease_zoom"):
+		camera.zoom += Vector2(-0.1, -0.1)
+		
 	if Input.is_action_pressed("up"):
 		velocity.y = -speed
 		anim.play("moving")
@@ -50,6 +58,8 @@ func _physics_process(delta):
 	
 	if velocity == Vector2(0,0): #not moving
 		anim.stop()
+	
+	keepPlayerInMap()
 	velocity = velocity.normalized()
 	velocity = move_and_slide(velocity * speed)
 	pass
@@ -62,7 +72,11 @@ func flipRifle(val):
 	rifle.sprite.flip_v=val
 	pass
 
-
 func _on_Footstep_finished():
 	footstep.stop()
+	pass
+	
+func keepPlayerInMap():
+	global_position.x = clamp(global_position.x, 0 + map.START_X * map.TILE_SIZE + map.TILE_SIZE, map.MAX_SIZE_X * map.TILE_SIZE - map.TILE_SIZE)
+	global_position.y = clamp(global_position.y, 0 + map.START_Y * map.TILE_SIZE + map.TILE_SIZE, map.MAX_SIZE_Y * map.TILE_SIZE - map.TILE_SIZE)
 	pass

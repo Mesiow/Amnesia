@@ -40,6 +40,12 @@ position = Vector2( -3.40131e-008, 5.49442e-008 )
 visible = false
 scale = Vector2( 0.5, 0.5 )
 current = true
+limit_left = -1600
+limit_top = -1600
+limit_right = 4800
+limit_bottom = 3200
+limit_smoothed = true
+smoothing_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
