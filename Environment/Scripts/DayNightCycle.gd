@@ -20,8 +20,8 @@ enum time{DAY = 0, NIGHT}
 var currentTime = null
 
 func _ready():
-	dayTimer.wait_time = 5 #5 minutes
-	nightTimer.wait_time = 5
+	dayTimer.wait_time = 300 #5 minutes
+	nightTimer.wait_time = 300
 	
 	currentTime = time.DAY
 	playAmbience(currentTime)
@@ -30,10 +30,6 @@ func _ready():
 	pass
 	
 func _process(delta):
-	#if cycle.is_playing() and night:
-	#	firepitLight.energy += 0.0001
-	#elif cycle.is_playing() and day:
-	#	firepitLight.energy -= 0.001
 	pass
 	
 func startDay():
