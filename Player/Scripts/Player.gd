@@ -30,6 +30,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("fire_rifle"):
 		if readyToShoot:
 			rifle.shoot()
+			get_tree().call_group("Deer", "playerFiredGun") #alert nearby deer that the player shot
 			readyToShoot = false
 			
 	if Input.is_action_just_pressed("use"):

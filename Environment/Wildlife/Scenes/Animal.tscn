@@ -1,14 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Environment/Wildlife/Scenes/Animal.gd" type="Script" id=1]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array(  )
-}
+[ext_resource path="res://Environment/Wildlife/Scripts/Animal.gd" type="Script" id=1]
 
 [node name="Animal" type="Area2D"]
 script = ExtResource( 1 )
+speed = 100
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
@@ -16,7 +12,6 @@ script = ExtResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
-[node name="AnimalPath" type="Path2D" parent="."]
-curve = SubResource( 1 )
-
-[node name="AnimalPathFollow" type="PathFollow2D" parent="AnimalPath"]
+[node name="NextMoveTimer" type="Timer" parent="."]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="timeout" from="NextMoveTimer" to="." method="_on_NextMoveTimer_timeout"]

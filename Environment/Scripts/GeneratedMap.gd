@@ -4,11 +4,14 @@ onready var grassTiles=$Tiles/GrassTileSet
 onready var treeTiles=$Tiles/TreeTileSet
 
 const TILE_SIZE = 16
-const MAX_SIZE_X = 300
+const MAX_SIZE_X = 200
 const MAX_SIZE_Y = 200
 
-const START_X = -100
-const START_Y = -100
+const START_X = -MAX_SIZE_X
+const START_Y = -MAX_SIZE_Y
+
+const WORLD_SIZE_X = MAX_SIZE_X * TILE_SIZE
+const WORLD_SIZE_Y = MAX_SIZE_Y * TILE_SIZE
 
 var grassArray = ["grass_1", "shrub_1", "shrub_2", "shrub_3"]
 var treeArray = ["tree_1", "stump_1"]
