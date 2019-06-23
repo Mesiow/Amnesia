@@ -13,5 +13,7 @@ speed = 100
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [node name="NextMoveTimer" type="Timer" parent="."]
+wait_time = 5.0
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
 [connection signal="timeout" from="NextMoveTimer" to="." method="_on_NextMoveTimer_timeout"]

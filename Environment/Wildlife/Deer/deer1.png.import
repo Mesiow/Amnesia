@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/deer3.png-a382ae249f71bb0c80d7986871e95e3e.stex"
+path="res://.import/deer1.png-2b46b2ae77fe4ca8196b8da987cd2748.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Environment/Wildlife/Sprites/deer3.png"
-dest_files=[ "res://.import/deer3.png-a382ae249f71bb0c80d7986871e95e3e.stex" ]
+source_file="res://Environment/Wildlife/Deer/deer1.png"
+dest_files=[ "res://.import/deer1.png-2b46b2ae77fe4ca8196b8da987cd2748.stex" ]
 
 [params]
 
