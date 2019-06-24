@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://UI/Scripts/SurvivalHUD.gd" type="Script" id=1]
+[ext_resource path="res://UI/Fonts/Berylium.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[node name="SurvivalHUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Days" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 201.0
+margin_right = 106.0
+margin_bottom = 224.0
+rect_scale = Vector2( 0.74241, 0.740182 )
+custom_fonts/font = SubResource( 1 )
+text = "Day: "
+
+[node name="Hunger" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 181.0
+margin_right = 78.0
+margin_bottom = 202.0
+custom_fonts/font = SubResource( 2 )
+text = "Hunger: "
+
+[node name="Label" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 161.0
+margin_right = 60.0
+margin_bottom = 182.0
+custom_fonts/font = SubResource( 3 )
+text = "Life: "

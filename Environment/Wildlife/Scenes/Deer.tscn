@@ -24,7 +24,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="Deer" index="0" instance=ExtResource( 1 )]
+[node name="Deer" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]

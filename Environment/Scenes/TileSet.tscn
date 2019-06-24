@@ -44,7 +44,7 @@
 3/navigation_offset = Vector2( 0, 0 )
 3/shapes = [  ]
 3/z_index = 0
-4/name = "water"
+4/name = "water1"
 4/texture = ExtResource( 1 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
@@ -80,10 +80,11 @@
 [node name="Tiles" type="Node2D"]
 
 [node name="GrassTileSet" type="TileMap" parent="."]
-modulate = Color( 0.156863, 0.709804, 0, 1 )
+modulate = Color( 0, 0.494118, 0.709804, 1 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
+tile_data = PoolIntArray( 852129, 4, 0, 852130, 4, 0, 852131, 4, 0, 852132, 4, 0, 917663, 4, 0, 917664, 4, 0, 917666, 4, 0, 917667, 4, 0, 983198, 4, 0, 983199, 4, 0, 983200, 4, 0, 983201, 4, 0, 1048731, 4, 0, 1048732, 4, 0, 1048733, 4, 0, 1048734, 4, 0, 1048735, 4, 0, 1048736, 4, 0, 1048737, 4, 0, 1114264, 4, 0, 1114265, 4, 0, 1114266, 4, 0, 1114267, 4, 0, 1114268, 4, 0, 1114269, 4, 0, 1114270, 4, 0, 1114271, 4, 0, 1179802, 4, 0, 1179803, 4, 0, 1179805, 4, 0, 1245335, 4, 0, 1245336, 4, 0, 1245337, 4, 0, 1245338, 4, 0, 1245339, 4, 0, 1245340, 4, 0, 1245341, 4, 0 )
 
 [node name="TreeTileSet" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -91,4 +92,3 @@ cell_size = Vector2( 16, 16 )
 cell_tile_origin = 1
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( 1703977, 1, 0, 2228265, 0, 0 )

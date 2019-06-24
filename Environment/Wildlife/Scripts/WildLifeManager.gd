@@ -8,7 +8,7 @@ const Deer=preload("res://Environment/Wildlife/Scenes/Deer.tscn")
 func _ready():
 	if world:
 		spawnDeer(3)
-		get_tree().call_group("Deer", "setPlayer", player) #call group func and pass in player reference to the Animal setPlayer method
+		get_tree().call_group("Animal", "setPlayer", player) #call group func and pass in player reference to the Animal setPlayer method
 	pass
 
 func spawnDeer(amount):

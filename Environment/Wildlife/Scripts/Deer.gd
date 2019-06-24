@@ -3,7 +3,6 @@ extends "res://Environment/Wildlife/Scripts/Animal.gd"
 const DeerFootprint = preload("res://Environment/Wildlife/Scenes/DeerFootprint.tscn")
 
 func _ready():
-	add_to_group("Deer")
 	spawn()
 	pass
 

@@ -30,6 +30,7 @@ func shoot():
 	muzzleBlast.lifetime = lifeTime
 	muzzleBlast.one_shot = true
 	muzzleBlast.emitting = true
+	
 	var hitChance = randi() %maxHitChance + 1
 	if hitChance >= minHitChance and hitChance <= maxHitChance: #hit successful
 		hit = true

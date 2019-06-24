@@ -9,10 +9,12 @@ onready var map = get_parent().get_node("GeneratedMap")
 
 onready var rifle=$Hands/Rifle
 onready var anim=$AnimatedSprite
-onready var footstep=$Footstep
+onready var footstep=$FootstepGrass
+onready var footstepWater=$FootstepWater
 onready var camera=$Camera2D
 
 var readyToShoot = true
+var inWater = false
 
 func _ready():
 	set_physics_process(true)
@@ -30,7 +32,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("fire_rifle"):
 		if readyToShoot:
 			rifle.shoot()
-			get_tree().call_group("Deer", "playerFiredGun") #alert nearby deer that the player shot
+			get_tree().call_group("Animal", "playerFiredGun") #alert nearby deer that the player shot
 			readyToShoot = false
 			
 	if Input.is_action_just_pressed("use"):
@@ -66,7 +68,12 @@ func _physics_process(delta):
 	pass
 
 func _on_AnimatedSprite_animation_finished():
-	footstep.play()
+	if !inWater:
+		footstep.play()
+		return
+		
+	#else we are in water
+	footstepWater.play()
 	pass 
 	
 func flipRifle(val):
@@ -76,6 +83,11 @@ func flipRifle(val):
 func _on_Footstep_finished():
 	footstep.stop()
 	pass
+	
+
+func _on_FootstepWater_finished():
+	footstepWater.stop()
+	pass 
 	
 func keepPlayerInMap():
 	global_position.x = clamp(global_position.x, 0 + map.START_X * map.TILE_SIZE + map.TILE_SIZE, map.MAX_SIZE_X * map.TILE_SIZE - map.TILE_SIZE)

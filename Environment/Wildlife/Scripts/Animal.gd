@@ -8,7 +8,7 @@ var moveDir = Vector2()
 var direction = Vector2()
 
 var feeding = false
-var fleed = false
+var fled = false
 
 var player = null
 
@@ -19,6 +19,7 @@ onready var anim = $AnimatedSprite
 onready var nextMoveTmer=$NextMoveTimer
 
 func _ready():
+	add_to_group("Animal")
 	nextMoveTmer.start()
 	pass
 
@@ -57,13 +58,13 @@ func spawn():
 	
 func randomDirection():
 	randomize()
-	var dirX = rand_range(-PI, PI)
-	var dirY = rand_range(-PI, PI)
+	var dirX = rand_range(-PI/2, PI/2)
+	var dirY = rand_range(-PI/2, PI/2)
 	return Vector2(dirX, dirY).normalized()#animal moves in random direction
 	pass
 	
 func flee():
-	if !fleed:
+	if !fled:
 		if player:
 			if player.global_position.x < global_position.x:
 				moveDir = randomDirection()
@@ -71,7 +72,7 @@ func flee():
 			else:
 				moveDir = -randomDirection()
 				speed = -defaultSpeed * 1.5
-			fleed = true
+			fled = true
 	pass
 
 func feed():
