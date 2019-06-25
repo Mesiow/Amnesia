@@ -8,16 +8,34 @@ const Firepit=preload("res://Environment/Scenes/Firepit.tscn")
 onready var map = get_parent().get_node("GeneratedMap")
 
 onready var rifle=$Hands/Rifle
+onready var rifleMuzzle=$Hands/Rifle/Muzzle
 onready var anim=$AnimatedSprite
 onready var footstep=$FootstepGrass
 onready var footstepWater=$FootstepWater
 onready var camera=$Camera2D
+onready var lookingDir=$LookingDirection
 
 var readyToShoot = true
 var inWater = false
+var hitTarget = false
 
 func _ready():
 	set_physics_process(true)
+	pass
+	
+func _process(delta):
+	var animaGroup = get_tree().get_nodes_in_group("Animal")
+	for animal in animaGroup:
+		var animalDirection = (animal.global_position - global_position).normalized() #direction vector from player to animal
+		var playerFacingDir = (rifleMuzzle.global_position - global_position).normalized()
+		if animalDirection.dot(playerFacingDir) > 0:
+			print("player sees animal")
+		else:
+			print("player doesnt")
+	pass
+	
+func _draw():
+	draw_circle(rifleMuzzle.position, 15, Color(255, 255, 255, 255))
 	pass
 	
 func _physics_process(delta):

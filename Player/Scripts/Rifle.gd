@@ -10,7 +10,7 @@ onready var shootTimer=$ShootTimer
 
 onready var shot=$Shot
 
-var minHitChance = 15
+var minHitChance = 5
 var maxHitChance = 25
 var hit = false
 
@@ -37,6 +37,8 @@ func shoot():
 	else:
 		hit = false
 		
+	if hit: player.hitTarget = true
+	
 	shot.play()
 	shootTimer.start()
 	pass

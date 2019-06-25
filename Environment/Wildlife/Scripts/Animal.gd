@@ -9,6 +9,7 @@ var direction = Vector2()
 
 var feeding = false
 var fled = false
+var dead = false
 
 var player = null
 
@@ -28,8 +29,13 @@ func _process(delta):
 		anim.flip_h = true
 	else:
 		anim.flip_h = false
+	
+	if player:
+		if player.hitTarget: #if player hit animal with rifle
+			if !dead:
+				died()
 		
-	if !feeding:
+	if !feeding and !dead:
 		anim.play("moving")
 	translate(speed * moveDir * delta)
 	pass
@@ -68,13 +74,20 @@ func flee():
 		if player:
 			if player.global_position.x < global_position.x:
 				moveDir = randomDirection()
-				speed = defaultSpeed * 1.5
+				speed = defaultSpeed * 1.8
 			else:
 				moveDir = -randomDirection()
-				speed = -defaultSpeed * 1.5
+				speed = defaultSpeed * 1.8
 			fled = true
 	pass
 
+func died():
+	dead = true
+	speed = 0
+	anim.play("death")
+	anim.stop()
+	pass
+	
 func feed():
 	feeding = true
 	speed = 0
@@ -100,8 +113,12 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport): #animal left the player
 
 
 func _on_NextMoveTimer_timeout():
-	feed()
-	nextMoveTmer.stop()
+	randomize()
+	if !fled:
+		feed()
+		
+	nextMoveTmer.wait_time = rand_range(0.0, 5.0)
+	nextMoveTmer.start()
 	pass 
 
 

@@ -5,9 +5,16 @@ onready var player=get_tree().get_root().get_node("/root/World/Player")
 
 const Deer=preload("res://Environment/Wildlife/Scenes/Deer.tscn")
 
+const maxGroupSize = 4
+
 func _ready():
-	if world:
-		spawnDeer(3)
+	pass
+	
+func _process(delta):
+	randomize()
+	var group = get_tree().get_nodes_in_group("Animal")
+	if group.size() <= 0:
+		spawnDeer(randi() %maxGroupSize + 0)
 		get_tree().call_group("Animal", "setPlayer", player) #call group func and pass in player reference to the Animal setPlayer method
 	pass
 

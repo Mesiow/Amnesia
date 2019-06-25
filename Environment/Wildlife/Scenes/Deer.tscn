@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Environment/Wildlife/Scenes/Animal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Environment/Wildlife/Scripts/Deer.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Environment/Wildlife/Deer/deer1.png" type="Texture" id=8]
 [ext_resource path="res://Environment/Wildlife/Deer/deer2.png" type="Texture" id=9]
 [ext_resource path="res://Environment/Wildlife/Deer/deer3.png" type="Texture" id=10]
+[ext_resource path="res://Environment/Wildlife/Deer/death.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -22,6 +23,11 @@ animations = [ {
 "loop": true,
 "name": "moving",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "death",
+"speed": 5.0
 } ]
 
 [node name="Deer" instance=ExtResource( 1 )]
@@ -29,5 +35,4 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
-animation = "moving"
-frame = 2
+animation = "death"
