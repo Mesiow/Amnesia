@@ -24,19 +24,15 @@ func _ready():
 	pass
 	
 func _process(delta):
-	var animaGroup = get_tree().get_nodes_in_group("Animal")
-	for animal in animaGroup:
-		var animalDirection = (animal.global_position - global_position).normalized() #direction vector from player to animal
-		var playerFacingDir = (rifleMuzzle.global_position - global_position).normalized()
-		if animalDirection.dot(playerFacingDir) > 0:
-			print("player sees animal")
-		else:
-			print("player doesnt")
+	var minDistance = calculateClosestAnimal()
+	if isAnimalInView():
+		pass#print("In view")
+	else:
+		pass#print("not in view")
+		
+	print(minDistance)
 	pass
 	
-func _draw():
-	draw_circle(rifleMuzzle.position, 15, Color(255, 255, 255, 255))
-	pass
 	
 func _physics_process(delta):
 	velocity=Vector2()
@@ -78,11 +74,46 @@ func _physics_process(delta):
 		anim.play("moving")
 	
 	if velocity == Vector2(0,0): #not moving
+	
 		anim.stop()
 	
 	keepPlayerInMap()
 	velocity = velocity.normalized()
 	velocity = move_and_slide(velocity * speed)
+	pass
+	
+func isAnimalInView():
+	var animalGroup = get_tree().get_nodes_in_group("Animal")
+	for animal in animalGroup:
+		var animalDirection = (animal.global_position - global_position).normalized() #direction vector from player to animal
+		var playerFacingDir = (get_global_mouse_position() - global_position).normalized()
+		if animalDirection.dot(playerFacingDir) > 0: #animal is in view of the direction we are facing
+			return true
+		else:
+			return false
+	pass
+	
+func calculateClosestAnimal():
+	var animalGroup = get_tree().get_nodes_in_group("Animal")
+	var animalDistances = []
+	
+	for animal in animalGroup:
+		var distanceToUs = animal.global_position.distance_to(global_position)
+		animalDistances.append(distanceToUs)
+		
+	animalDistances.sort() #sort the distances
+	if animalDistances.size() > 0:
+		var minDist = animalDistances[0]
+		for i in range(1, animalDistances.size()):
+			minDist = min(minDist, animalDistances[i]) #get min of both
+		return minDist
+	pass
+	
+func justShot():
+	if Input.is_action_just_pressed("fire_rifle") and readyToShoot:
+		return true
+		
+	return false
 	pass
 
 func _on_AnimatedSprite_animation_finished():

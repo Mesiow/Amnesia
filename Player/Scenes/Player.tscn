@@ -58,9 +58,6 @@ volume_db = -15.0
 [node name="FootstepWater" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = 1.0
-
-[node name="LookingDirection" type="Position2D" parent="."]
-position = Vector2( -26.6667, 1.49012e-008 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="finished" from="FootstepGrass" to="." method="_on_Footstep_finished"]
 [connection signal="finished" from="FootstepWater" to="." method="_on_FootstepWater_finished"]
