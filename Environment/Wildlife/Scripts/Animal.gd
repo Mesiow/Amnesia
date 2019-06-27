@@ -12,6 +12,7 @@ var fled = false
 var dead = false
 
 var player = null
+var distanceToPlayer = null
 
 onready var world = get_tree().get_root().get_node("/root/World")
 onready var map = get_tree().get_root().get_node("/root/World/GeneratedMap")
@@ -31,9 +32,10 @@ func _process(delta):
 		anim.flip_h = false
 	
 	if player:
-		if player.hitTarget: #if player hit animal with rifle
-			if !dead:
-				died()
+		distanceToPlayer = global_position.distance_to(player.global_position)
+		#if player.hitTarget: #if player hit animal with rifle
+		#	if !dead:
+		#		kill()
 		
 	if !feeding and !dead:
 		anim.play("moving")
@@ -81,7 +83,7 @@ func flee():
 			fled = true
 	pass
 
-func died():
+func kill():
 	dead = true
 	speed = 0
 	anim.play("death")

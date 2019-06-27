@@ -13,24 +13,25 @@ onready var anim=$AnimatedSprite
 onready var footstep=$FootstepGrass
 onready var footstepWater=$FootstepWater
 onready var camera=$Camera2D
-onready var lookingDir=$LookingDirection
 
 var readyToShoot = true
 var inWater = false
 var hitTarget = false
+var seesAnimal = false
+var closestAnimalDist = Vector2()
 
 func _ready():
 	set_physics_process(true)
 	pass
 	
 func _process(delta):
-	var minDistance = calculateClosestAnimal()
+	closestAnimalDist = calculateClosestAnimal()
 	if isAnimalInView():
-		pass#print("In view")
+		seesAnimal = true
 	else:
-		pass#print("not in view")
+		seesAnimal = false
 		
-	print(minDistance)
+	#print(minDistance)
 	pass
 	
 	
@@ -84,7 +85,7 @@ func _physics_process(delta):
 	
 func isAnimalInView():
 	var animalGroup = get_tree().get_nodes_in_group("Animal")
-	for animal in animalGroup:
+	for animal in animalGroup: 
 		var animalDirection = (animal.global_position - global_position).normalized() #direction vector from player to animal
 		var playerFacingDir = (get_global_mouse_position() - global_position).normalized()
 		if animalDirection.dot(playerFacingDir) > 0: #animal is in view of the direction we are facing
@@ -107,13 +108,6 @@ func calculateClosestAnimal():
 		for i in range(1, animalDistances.size()):
 			minDist = min(minDist, animalDistances[i]) #get min of both
 		return minDist
-	pass
-	
-func justShot():
-	if Input.is_action_just_pressed("fire_rifle") and readyToShoot:
-		return true
-		
-	return false
 	pass
 
 func _on_AnimatedSprite_animation_finished():

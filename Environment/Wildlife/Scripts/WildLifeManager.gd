@@ -12,10 +12,20 @@ func _ready():
 	
 func _process(delta):
 	randomize()
-	var group = get_tree().get_nodes_in_group("Animal")
-	if group.size() <= 0:
+	var animalGroup = get_tree().get_nodes_in_group("Animal")
+	if animalGroup.size() <= 0:
 		spawnDeer(randi() %maxGroupSize + 0)
 		get_tree().call_group("Animal", "setPlayer", player) #call group func and pass in player reference to the Animal setPlayer method
+
+	if player:
+		if player.hitTarget:
+			for animal in animalGroup:
+				print("Player closest dist to animal: " + str(player.closestAnimalDist))
+				if player.closestAnimalDist >= animal.distanceToPlayer: #if we shot at the closest deer we got it
+					if !animal.dead:
+						animal.kill()
+						player.hitTarget = false
+						return
 	pass
 
 func spawnDeer(amount):

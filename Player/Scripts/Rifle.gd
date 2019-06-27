@@ -37,7 +37,7 @@ func shoot():
 	else:
 		hit = false
 		
-	if hit: player.hitTarget = true
+	if player.seesAnimal and hit: player.hitTarget = true
 	
 	shot.play()
 	shootTimer.start()
