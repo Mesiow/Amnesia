@@ -12,6 +12,7 @@ onready var rifleMuzzle=$Hands/Rifle/Muzzle
 onready var anim=$AnimatedSprite
 onready var footstep=$FootstepGrass
 onready var footstepWater=$FootstepWater
+onready var itemPickup=$ItemPickup
 onready var camera=$Camera2D
 
 var readyToShoot = true
@@ -75,6 +76,7 @@ func handleInteractionInput():
 
 	if Input.is_action_just_pressed("pickup"):
 		if nearKilledAnimal:
+			itemPickup.play()
 			emit_signal("pickedUpFood")
 			grabbedFood = true
 			
@@ -85,10 +87,10 @@ func handleInteractionInput():
 	pass
 
 func handleMovementInput():
-	#if Input.is_action_just_pressed("increase_zoom"):
-	#	camera.zoom += Vector2(0.1, 0.1)
-	#if Input.is_action_just_pressed("decrease_zoom"):
-	#	camera.zoom += Vector2(-0.1, -0.1)
+	if Input.is_action_just_pressed("increase_zoom"):
+		camera.zoom += Vector2(0.1, 0.1)
+	if Input.is_action_just_pressed("decrease_zoom"):
+		camera.zoom += Vector2(-0.1, -0.1)
 		
 	if Input.is_action_pressed("up"):
 		velocity.y = -speed

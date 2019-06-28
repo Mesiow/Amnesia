@@ -19,6 +19,8 @@ onready var canvas=$CanvasModulate
 enum time{DAY = 0, NIGHT}
 var currentTime = null
 
+signal dayEnded
+
 func _ready():
 	dayTimer.wait_time = 300 #5 minutes
 	nightTimer.wait_time = 300
@@ -75,6 +77,7 @@ func stopAmbience(time):
 	pass
 
 func _on_DayTimer_timeout():
+	emit_signal("dayEnded")
 	startNight()
 	dayTimer.stop()
 	pass

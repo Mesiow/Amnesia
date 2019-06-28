@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Sprites/Survivor1.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Player/Scenes/Rifle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Sounds/forest_step.wav" type="AudioStream" id=6]
 [ext_resource path="res://Player/Sounds/waterfootstep.wav" type="AudioStream" id=7]
+[ext_resource path="res://Player/Sounds/packaway.wav" type="AudioStream" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -58,6 +59,10 @@ volume_db = -15.0
 [node name="FootstepWater" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = 1.0
+
+[node name="ItemPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="finished" from="FootstepGrass" to="." method="_on_Footstep_finished"]
 [connection signal="finished" from="FootstepWater" to="." method="_on_FootstepWater_finished"]

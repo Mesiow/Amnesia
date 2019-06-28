@@ -23,5 +23,6 @@ z_index = 1
 [node name="SurvivalHUD" parent="." instance=ExtResource( 6 )]
 [connection signal="pickedUpFood" from="Player" to="SurvivalHUD" method="_on_Player_pickedUpFood"]
 [connection signal="shotRifle" from="Player" to="SurvivalHUD" method="_on_Player_shotRifle"]
+[connection signal="dayEnded" from="DayNightCycle" to="SurvivalHUD" method="_on_DayNightCycle_dayEnded"]
 
 [editable path="SurvivalHUD"]

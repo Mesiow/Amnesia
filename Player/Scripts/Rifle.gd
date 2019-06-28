@@ -13,6 +13,7 @@ onready var shot=$Shot
 var minHitChance = 5
 var maxHitChance = 25
 var hit = false
+var inRange = false
 
 func _ready():
 	pass
@@ -45,4 +46,17 @@ func shoot():
 
 func _on_ShootTimer_timeout():
 	player.readyToShoot = true
+	pass
+
+func _on_RangeArea_area_entered(area):
+	print(area.get_name())
+	if area.get_name() == "Deer":
+		inRange = true
+		print("in range")
+	pass
+
+func _on_RangeArea_area_exited(area):
+	if area.get_name() == "Deer":
+		inRange = false
+		print("out of range")
 	pass
