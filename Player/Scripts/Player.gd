@@ -18,7 +18,12 @@ var readyToShoot = true
 var inWater = false
 var hitTarget = false
 var seesAnimal = false
+var nearKilledAnimal = false
+var grabbedFood = false
 var closestAnimalDist = Vector2()
+
+signal shotRifle
+signal pickedUpFood
 
 func _ready():
 	set_physics_process(true)
@@ -44,21 +49,46 @@ func _physics_process(delta):
 		anim.flip_h = false
 		flipRifle(true)
 		
-	if Input.is_action_pressed("fire_rifle"):
+	handleInput() # handles all player input
+
+	if velocity == Vector2(0,0):
+		anim.stop()
+	
+	keepPlayerInMap()
+	velocity = velocity.normalized()
+	velocity = move_and_slide(velocity * speed)
+	pass
+
+
+func handleInput():
+	handleMovementInput()
+	handleInteractionInput()
+	pass
+
+func handleInteractionInput():
+	if Input.is_action_pressed("fire_rifle"): #shoot the gun
 		if readyToShoot:
 			rifle.shoot()
-			get_tree().call_group("Animal", "playerFiredGun") #alert nearby deer that the player shot
+			emit_signal("shotRifle")
+			get_tree().call_group("Animal", "playerFiredGun") #alert nearby deer/animal that the player shot
 			readyToShoot = false
+
+	if Input.is_action_just_pressed("pickup"):
+		if nearKilledAnimal:
+			emit_signal("pickedUpFood")
+			grabbedFood = true
 			
 	if Input.is_action_just_pressed("use"):
 		var pit=Firepit.instance()
 		pit.global_position = global_position
 		get_tree().get_root().get_node("/root/World").add_child(pit)
-		
-	if Input.is_action_just_pressed("increase_zoom"):
-		camera.zoom += Vector2(0.1, 0.1)
-	if Input.is_action_just_pressed("decrease_zoom"):
-		camera.zoom += Vector2(-0.1, -0.1)
+	pass
+
+func handleMovementInput():
+	#if Input.is_action_just_pressed("increase_zoom"):
+	#	camera.zoom += Vector2(0.1, 0.1)
+	#if Input.is_action_just_pressed("decrease_zoom"):
+	#	camera.zoom += Vector2(-0.1, -0.1)
 		
 	if Input.is_action_pressed("up"):
 		velocity.y = -speed
@@ -73,14 +103,6 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("right"):
 		velocity.x = speed
 		anim.play("moving")
-	
-	if velocity == Vector2(0,0): #not moving
-	
-		anim.stop()
-	
-	keepPlayerInMap()
-	velocity = velocity.normalized()
-	velocity = move_and_slide(velocity * speed)
 	pass
 	
 func isAnimalInView():

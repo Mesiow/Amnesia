@@ -7,6 +7,8 @@ const Deer=preload("res://Environment/Wildlife/Scenes/Deer.tscn")
 
 const maxGroupSize = 4
 
+var animalRef = null
+
 func _ready():
 	pass
 	
@@ -15,17 +17,37 @@ func _process(delta):
 	var animalGroup = get_tree().get_nodes_in_group("Animal")
 	if animalGroup.size() <= 0:
 		spawnDeer(randi() %maxGroupSize + 0)
-		get_tree().call_group("Animal", "setPlayer", player) #call group func and pass in player reference to the Animal setPlayer method
+		get_tree().call_group("Animal", "setPlayer", player) #call group func and pass in player reference to the Animal setPlayer method so that the animal can reference the player
 
+	handlePlayerAnimalInteraction(animalGroup)
+	pass
+
+func handlePlayerAnimalInteraction(animalGroup):
 	if player:
 		if player.hitTarget:
-			for animal in animalGroup:
-				print("Player closest dist to animal: " + str(player.closestAnimalDist))
-				if player.closestAnimalDist >= animal.distanceToPlayer: #if we shot at the closest deer we got it
-					if !animal.dead:
-						animal.kill()
-						player.hitTarget = false
-						return
+			if animalGroup.size() > 0:
+				for animal in animalGroup:
+					#print("Player closest dist to animal: " + str(player.closestAnimalDist))
+					if animalRef: break
+					if player.closestAnimalDist >= animal.distanceToPlayer: #if we shot at the closest deer we got it
+						if !animal.dead:
+							animal.kill()
+							animalRef = animal
+							player.hitTarget = false
+							break
+		if animalRef and player.grabbedFood:
+			animalRef.queue_free() #delete the animal because the player grabbed the food
+			animalRef = null
+			player.grabbedFood = false
+
+		if animalRef:
+			if animalRef.distanceToPlayer <= 20:
+				player.nearKilledAnimal = true
+			else:
+				player.nearKilledAnimal = false
+		else:
+			player.nearKilledAnimal = false
+
 	pass
 
 func spawnDeer(amount):
