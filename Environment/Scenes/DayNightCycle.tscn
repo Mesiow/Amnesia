@@ -4,6 +4,8 @@
 [ext_resource path="res://Environment/Sounds/Nature Ambiance-SoundBible.com-1444637890.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Environment/Sounds/Night_Sounds_-_Crickets-Lisa_Redfern-591005346.ogg" type="AudioStream" id=3]
 
+
+
 [sub_resource type="Animation" id=1]
 resource_name = "NightTransition"
 length = 20.0

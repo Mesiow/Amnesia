@@ -15,6 +15,8 @@ onready var footstepWater=$FootstepWater
 onready var itemPickup=$ItemPickup
 onready var camera=$Camera2D
 
+onready var hungerTimer=$HungerTimer
+
 var readyToShoot = true
 var inWater = false
 var hitTarget = false
@@ -25,9 +27,18 @@ var closestAnimalDist = Vector2()
 
 signal shotRifle
 signal pickedUpFood
+signal hunger
+
+var equipped = {}
+
 
 func _ready():
 	set_physics_process(true)
+
+	equipped.inHand = "Hands" #start game with fists
+	
+	hungerTimer.wait_time = 25.0
+	hungerTimer.start()
 	pass
 	
 func _process(delta):
@@ -67,7 +78,7 @@ func handleInput():
 	pass
 
 func handleInteractionInput():
-	if Input.is_action_pressed("fire_rifle"): #shoot the gun
+	if Input.is_action_pressed("fire_rifle") and equipped["inHand"] == "Rifle": #shoot the gun
 		if readyToShoot:
 			rifle.shoot()
 			emit_signal("shotRifle")
@@ -91,20 +102,39 @@ func handleMovementInput():
 		camera.zoom += Vector2(0.1, 0.1)
 	if Input.is_action_just_pressed("decrease_zoom"):
 		camera.zoom += Vector2(-0.1, -0.1)
+
+	if Input.is_action_just_pressed("switch_items"):
+		switchItem()
 		
 	if Input.is_action_pressed("up"):
 		velocity.y = -speed
-		anim.play("moving")
+		handleAnimation()
 	elif Input.is_action_pressed("down"):
 		velocity.y = speed
-		anim.play("moving")
+		handleAnimation()
 		
 	if Input.is_action_pressed("left"):
 		velocity.x = -speed
-		anim.play("moving")
+		handleAnimation()
 	elif Input.is_action_pressed("right"):
 		velocity.x = speed
-		anim.play("moving")
+		handleAnimation()
+	pass
+
+func switchItem():
+	if equipped["inHand"] == "Rifle":
+		equipped["inHand"] = "Hands"
+		rifle.toggleOff()
+	elif equipped["inHand"] == "Hands":
+		equipped["inHand"] = "Rifle"
+		rifle.toggleOn()
+	pass
+
+func handleAnimation():
+	if equipped["inHand"] == "Rifle":
+		anim.play("movingRifle")
+	elif equipped["inHand"] == "Hands":
+		anim.play("movingUnarmed")
 	pass
 	
 func isAnimalInView():
@@ -159,4 +189,9 @@ func _on_FootstepWater_finished():
 func keepPlayerInMap():
 	global_position.x = clamp(global_position.x, 0 + map.START_X * map.TILE_SIZE + map.TILE_SIZE, map.MAX_SIZE_X * map.TILE_SIZE - map.TILE_SIZE)
 	global_position.y = clamp(global_position.y, 0 + map.START_Y * map.TILE_SIZE + map.TILE_SIZE, map.MAX_SIZE_Y * map.TILE_SIZE - map.TILE_SIZE)
+	pass
+
+
+func _on_HungerTimer_timeout():
+	emit_signal("hunger")
 	pass

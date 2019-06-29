@@ -9,19 +9,33 @@ onready var muzzleBlast=$MuzzleBlast
 onready var shootTimer=$ShootTimer
 
 onready var shot=$Shot
+onready var loaded=$Loaded
 
-var minHitChance = 5
+var minHitChance = 15
 var maxHitChance = 25
 var hit = false
 var inRange = false
+var disabled = true
 
 func _ready():
+	toggleOff()
 	pass
 	
 func _process(delta):
 	look_at(get_global_mouse_position())
 	pass
 	
+
+func toggleOn():
+	disabled = false
+	loaded.play()
+	show()
+	pass
+
+func toggleOff():
+	disabled = true
+	hide()
+	pass
 	
 func shoot():
 	randomize()

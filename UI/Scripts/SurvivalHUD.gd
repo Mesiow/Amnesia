@@ -11,14 +11,14 @@ var startingLife = 100
 var startingAmmo = 25
 var startingFood = 0
 var startingDay = 0
+var startingHunger = 0
 
 func _ready():
 	life.text = life.text + str(startingLife)
 	food.text = food.text + str(startingFood)
 	days.text = days.text + str(startingDay)
-	hunger.text = hunger.text + str(0)
+	hunger.text = hunger.text + str(startingHunger)
 	ammo.text = ammo.text + str(startingAmmo)
-
 	pass
 
 func _on_Player_shotRifle():
@@ -35,4 +35,9 @@ func _on_Player_pickedUpFood():
 func _on_DayNightCycle_dayEnded():
 	startingDay+=1
 	days.text = "Day: " + str(startingDay)
+	pass
+
+func _on_Player_hunger():
+	startingHunger+=5
+	hunger.text = "Hunger: " + str(startingHunger)
 	pass

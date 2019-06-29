@@ -3,6 +3,8 @@
 [ext_resource path="res://Environment/Sprites/naturetileset.png" type="Texture" id=1]
 [ext_resource path="res://Environment/Sprites/trees.png" type="Texture" id=2]
 
+
+
 [sub_resource type="TileSet" id=1]
 0/name = "shrub_3"
 0/texture = ExtResource( 1 )

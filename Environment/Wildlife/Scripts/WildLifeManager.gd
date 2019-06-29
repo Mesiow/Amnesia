@@ -28,7 +28,7 @@ func handlePlayerAnimalInteraction(animalGroup):
 			if animalGroup.size() > 0:
 				for animal in animalGroup:
 					if animalRef: break
-					if player.closestAnimalDist >= animal.distanceToPlayer: #if we shot at the closest deer we got it
+					if player.closestAnimalDist >= animal.distanceToPlayer: #if we shot at the closest deer, we got it
 						if !animal.dead:
 							animal.kill()
 							animalRef = animal

@@ -4,6 +4,8 @@
 [ext_resource path="res://Environment/Wildlife/Deer/Footprint.png" type="Texture" id=2]
 [ext_resource path="res://Environment/Wildlife/Scripts/DeerFootprint.gd" type="Script" id=3]
 
+
+
 [node name="DeerFootprint" instance=ExtResource( 1 )]
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )

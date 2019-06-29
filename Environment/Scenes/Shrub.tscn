@@ -2,6 +2,8 @@
 
 [ext_resource path="res://Environment/Sprites/nature.png" type="Texture" id=1]
 
+
+
 [node name="Shrub" type="Sprite"]
 position = Vector2( 1296, 452.25 )
 texture = ExtResource( 1 )

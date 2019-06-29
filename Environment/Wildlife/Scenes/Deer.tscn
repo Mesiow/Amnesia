@@ -12,6 +12,8 @@
 [ext_resource path="res://Environment/Wildlife/Deer/feed4.png" type="Texture" id=10]
 [ext_resource path="res://Environment/Wildlife/Deer/feed5.png" type="Texture" id=11]
 
+
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
