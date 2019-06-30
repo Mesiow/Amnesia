@@ -1,27 +1,28 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Player/Sprites/SurvivorUnarmed1.png" type="Texture" id=2]
-[ext_resource path="res://Player/Sprites/SurvivorUnarmed2.png" type="Texture" id=3]
-[ext_resource path="res://Player/Sprites/SurvivorUnarmed3.png" type="Texture" id=4]
-[ext_resource path="res://Player/Sprites/Survivor1.png" type="Texture" id=5]
-[ext_resource path="res://Player/Sprites/Survivor2.png" type="Texture" id=6]
-[ext_resource path="res://Player/Sprites/Survivor3.png" type="Texture" id=7]
+[ext_resource path="res://Player/Sprites/Survivor1.png" type="Texture" id=2]
+[ext_resource path="res://Player/Sprites/Survivor2.png" type="Texture" id=3]
+[ext_resource path="res://Player/Sprites/Survivor3.png" type="Texture" id=4]
+[ext_resource path="res://Player/Sprites/SurvivorUnarmed1.png" type="Texture" id=5]
+[ext_resource path="res://Player/Sprites/SurvivorUnarmed2.png" type="Texture" id=6]
+[ext_resource path="res://Player/Sprites/SurvivorUnarmed3.png" type="Texture" id=7]
 [ext_resource path="res://Player/Scenes/Rifle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Player/Sounds/forest_step.wav" type="AudioStream" id=9]
 [ext_resource path="res://Player/Sounds/waterfootstep.wav" type="AudioStream" id=10]
 [ext_resource path="res://Player/Sounds/packaway.wav" type="AudioStream" id=11]
+[ext_resource path="res://Player/Sounds/eat.wav" type="AudioStream" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
-"name": "movingUnarmed",
+"name": "movingRifle",
 "speed": 8.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "movingRifle",
+"name": "movingUnarmed",
 "speed": 8.0
 } ]
 
@@ -64,7 +65,7 @@ __meta__ = {
 
 [node name="FootstepGrass" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="FootstepWater" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
@@ -74,8 +75,15 @@ volume_db = 1.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
+[node name="Chew" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -10.0
+
 [node name="HungerTimer" type="Timer" parent="."]
+
+[node name="DamagedTimer" type="Timer" parent="."]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="finished" from="FootstepGrass" to="." method="_on_Footstep_finished"]
 [connection signal="finished" from="FootstepWater" to="." method="_on_FootstepWater_finished"]
 [connection signal="timeout" from="HungerTimer" to="." method="_on_HungerTimer_timeout"]
+[connection signal="timeout" from="DamagedTimer" to="." method="_on_DamagedTimer_timeout"]

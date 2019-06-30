@@ -6,6 +6,7 @@ var speed=150
 const Firepit=preload("res://Environment/Scenes/Firepit.tscn")
 
 onready var map = get_parent().get_node("GeneratedMap")
+onready var hud = get_parent().get_node("SurvivalHUD")
 
 onready var rifle=$Hands/Rifle
 onready var rifleMuzzle=$Hands/Rifle/Muzzle
@@ -13,9 +14,11 @@ onready var anim=$AnimatedSprite
 onready var footstep=$FootstepGrass
 onready var footstepWater=$FootstepWater
 onready var itemPickup=$ItemPickup
+onready var chew=$Chew
 onready var camera=$Camera2D
 
 onready var hungerTimer=$HungerTimer
+onready var damagedTimer=$DamagedTimer
 
 var readyToShoot = true
 var inWater = false
@@ -28,7 +31,11 @@ var closestAnimalDist = Vector2()
 signal shotRifle
 signal pickedUpFood
 signal hunger
+signal lifeDropped
+signal ateFood
 
+var life : int = 100
+var died = false
 var equipped = {}
 
 
@@ -39,6 +46,8 @@ func _ready():
 	
 	hungerTimer.wait_time = 25.0
 	hungerTimer.start()
+	
+	damagedTimer.wait_time = 5.0
 	pass
 	
 func _process(delta):
@@ -47,8 +56,6 @@ func _process(delta):
 		seesAnimal = true
 	else:
 		seesAnimal = false
-		
-	#print(minDistance)
 	pass
 	
 	
@@ -90,6 +97,10 @@ func handleInteractionInput():
 			itemPickup.play()
 			emit_signal("pickedUpFood")
 			grabbedFood = true
+			
+	if Input.is_action_just_pressed("eat") and hud.getFoodCounter() > 0:
+		emit_signal("ateFood")
+		chew.play()
 			
 	if Input.is_action_just_pressed("use"):
 		var pit=Firepit.instance()
@@ -181,7 +192,6 @@ func _on_Footstep_finished():
 	footstep.stop()
 	pass
 	
-
 func _on_FootstepWater_finished():
 	footstepWater.stop()
 	pass 
@@ -194,4 +204,17 @@ func keepPlayerInMap():
 
 func _on_HungerTimer_timeout():
 	emit_signal("hunger")
+	pass
+
+func _on_SurvivalHUD_hungerMaxed():
+	damagedTimer.start()
+	pass 
+
+func _on_DamagedTimer_timeout():
+	emit_signal("lifeDropped")
+	pass
+
+
+func _on_SurvivalHUD_lifeGone():
+	died = true
 	pass

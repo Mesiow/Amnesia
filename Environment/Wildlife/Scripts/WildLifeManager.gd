@@ -5,7 +5,7 @@ onready var player=get_tree().get_root().get_node("/root/World/Player")
 
 const Deer=preload("res://Environment/Wildlife/Scenes/Deer.tscn")
 
-const maxGroupSize = 5
+const maxGroupSize : int = 5
 
 var animalRef = null
 
@@ -27,8 +27,8 @@ func handlePlayerAnimalInteraction(animalGroup):
 		if player.hitTarget:
 			if animalGroup.size() > 0:
 				for animal in animalGroup:
-					if animalRef: break
-					if player.closestAnimalDist >= animal.distanceToPlayer: #if we shot at the closest deer, we got it
+					#if animalRef: break
+					if player.closestAnimalDist > animal.distanceToPlayer: #if we shot at the closest deer, we got it
 						if !animal.dead:
 							animal.kill()
 							animalRef = animal

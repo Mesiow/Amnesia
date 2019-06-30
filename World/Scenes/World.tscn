@@ -21,9 +21,13 @@ z_index = 1
 [node name="WildLifeManager" parent="." instance=ExtResource( 5 )]
 
 [node name="SurvivalHUD" parent="." instance=ExtResource( 6 )]
+[connection signal="ateFood" from="Player" to="SurvivalHUD" method="_on_Player_ateFood"]
 [connection signal="hunger" from="Player" to="SurvivalHUD" method="_on_Player_hunger"]
+[connection signal="lifeDropped" from="Player" to="SurvivalHUD" method="_on_Player_lifeDropped"]
 [connection signal="pickedUpFood" from="Player" to="SurvivalHUD" method="_on_Player_pickedUpFood"]
 [connection signal="shotRifle" from="Player" to="SurvivalHUD" method="_on_Player_shotRifle"]
 [connection signal="dayEnded" from="DayNightCycle" to="SurvivalHUD" method="_on_DayNightCycle_dayEnded"]
+[connection signal="hungerMaxed" from="SurvivalHUD" to="Player" method="_on_SurvivalHUD_hungerMaxed"]
+[connection signal="lifeGone" from="SurvivalHUD" to="Player" method="_on_SurvivalHUD_lifeGone"]
 
 [editable path="SurvivalHUD"]
