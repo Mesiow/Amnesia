@@ -33,9 +33,10 @@ signal pickedUpFood
 signal hunger
 signal lifeDropped
 signal ateFood
+signal playerDied
 
 var life : int = 100
-var died = false
+var died : bool = false setget, isAlive
 var equipped = {}
 
 
@@ -44,10 +45,10 @@ func _ready():
 
 	equipped.inHand = "Hands" #start game with fists
 	
-	hungerTimer.wait_time = 25.0
+	hungerTimer.wait_time = 1.0
 	hungerTimer.start()
 	
-	damagedTimer.wait_time = 5.0
+	damagedTimer.wait_time = 1.0
 	pass
 	
 func _process(delta):
@@ -67,8 +68,8 @@ func _physics_process(delta):
 	else:
 		anim.flip_h = false
 		flipRifle(true)
-		
-	handleInput() # handles all player input
+	if !died:
+		handleInput() # handles all player input
 
 	if velocity == Vector2(0,0):
 		anim.stop()
@@ -82,6 +83,10 @@ func _physics_process(delta):
 func handleInput():
 	handleMovementInput()
 	handleInteractionInput()
+	pass
+	
+func isAlive() -> bool:
+	return died
 	pass
 
 func handleInteractionInput():
@@ -217,4 +222,6 @@ func _on_DamagedTimer_timeout():
 
 func _on_SurvivalHUD_lifeGone():
 	died = true
+	hide()
+	emit_signal("playerDied")
 	pass

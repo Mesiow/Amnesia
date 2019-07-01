@@ -50,7 +50,7 @@ func _on_Player_hunger():
 	if startingHunger >= 100:
 		emit_signal("hungerMaxed")
 		return
-	startingHunger+=5
+	startingHunger+=20
 	updateHunger()
 	pass
 
@@ -59,7 +59,7 @@ func _on_Player_lifeDropped():
 	if startingLife <= 0:
 		emit_signal("lifeGone")
 		return
-	startingLife-=2
+	startingLife-=20
 	life.text = "Life: " + str(startingLife)
 	pass
 
